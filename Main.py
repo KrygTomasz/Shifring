@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pywt.data
 from PIL import Image
 
-import Huffman
+import Compression
 
 # Load image
 original = pywt.data.aero()
@@ -24,7 +24,7 @@ for i, a in enumerate([LL, LH, HL, HH]):
     ax.imshow(a, origin='image', interpolation="nearest", cmap=plt.cm.gray)
     ax.set_title(titles[i], fontsize=12)
 
-print(LL)
+print(LH)
 
 fig.suptitle("dwt2 coefficients", fontsize=14)
 
@@ -38,10 +38,7 @@ np.testing.assert_allclose(original, reconstructed, atol=1e-13, rtol=1e-13)
 
 plt.show()
 
-array = LL.flatten()
-text = str(array.tolist())
+array = LH.flatten()
 
-huffman = Huffman.Huffman()
-f = open('encrypted.txt', 'w')
-f.write(huffman.encode(text))
-f.close()
+compression = Compression.Compression()
+compression.compress(array)
