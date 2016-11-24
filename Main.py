@@ -42,3 +42,8 @@ array = LH.flatten()
 
 compression = Compression.Compression()
 compression.compress(array)
+
+file = open('encrypted.txt','r')
+txt = file.read()
+print len(txt)
+

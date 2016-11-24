@@ -1,5 +1,5 @@
 import Huffman
-
+from bitarray import bitarray
 
 class Compression:
 
@@ -19,7 +19,20 @@ class Compression:
         text = text.replace('.0', '')
         print text
 
+
+
         huffman = Huffman.Huffman()
-        f = open('encrypted.txt', 'w')
-        f.write(huffman.encode(text))
+        encryptedText = huffman.encode(text)
+        print len(encryptedText)
+        bits = bitarray(len(encryptedText))
+        bits.setall(0)
+        print encryptedText
+        for i in range(len(encryptedText)):
+            if encryptedText[i] == '1':
+                bits[i] = 1
+
+        #print bits
+
+        f = open('encrypted.txt', 'wb')
+        f.write(bits)
         f.close()
