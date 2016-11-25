@@ -1,9 +1,13 @@
 import Huffman
-from bitarray import bitarray
+import numpy as np
 
 class Compression:
 
     def compress(self, array):
+
+        width = len(array[0])
+        print width
+        array = array.flatten()
         print array
         print len(array)
 
@@ -12,27 +16,23 @@ class Compression:
                 array[i] = 0
             array[i] = round(array[i], 0)
 
-        print array
         text = str(array.tolist())
         text = text.replace(' ', '')
-        print text
         text = text.replace('.0', '')
         print text
 
+        encoder = Huffman.Encoder(text)
+        encoder.write('compressedFile.cgk')
 
-
-        huffman = Huffman.Huffman()
-        encryptedText = huffman.encode(text)
-        print len(encryptedText)
-        bits = bitarray(len(encryptedText))
-        bits.setall(0)
-        print encryptedText
-        for i in range(len(encryptedText)):
-            if encryptedText[i] == '1':
-                bits[i] = 1
-
-        #print bits
-
-        f = open('encrypted.txt', 'wb')
-        f.write(bits)
-        f.close()
+    def decompress(self, fileName):
+        decoder = Huffman.Decoder(fileName)
+        decodedText = decoder.decode()
+        print decodedText
+        listed = list(eval(decodedText))
+        print listed
+        print len(listed)
+        numpyArray = np.array(listed)
+        shape = (300, 300)
+        matrix = numpyArray.reshape(shape)
+        print matrix.shape
+        print matrix

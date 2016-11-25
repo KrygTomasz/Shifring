@@ -38,12 +38,9 @@ np.testing.assert_allclose(original, reconstructed, atol=1e-13, rtol=1e-13)
 
 plt.show()
 
-array = LH.flatten()
-
 compression = Compression.Compression()
-compression.compress(array)
+compression.compress(LH)
 
-file = open('encrypted.txt','r')
-txt = file.read()
-print len(txt)
+fileName = 'compressedFile.cgk'
 
+compression.decompress(fileName)
