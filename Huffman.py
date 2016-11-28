@@ -81,8 +81,8 @@ class Encoder(object):
             if os.path.exists(filename_or_long_str):
                 self.encode(filename_or_long_str)
             else:
-                print '[Encoder] take \'%s\' as a string to be encoded.' \
-                      % filename_or_long_str
+                #print '[Encoder] take \'%s\' as a string to be encoded.' \
+                #      % filename_or_long_str
                 self.long_str = filename_or_long_str
 
     def __get_long_str(self):

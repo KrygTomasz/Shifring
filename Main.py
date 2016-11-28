@@ -24,7 +24,7 @@ for i, a in enumerate([LL, LH, HL, HH]):
     ax.imshow(a, origin='image', interpolation="nearest", cmap=plt.cm.gray)
     ax.set_title(titles[i], fontsize=12)
 
-print(LH)
+#print(LH)
 
 fig.suptitle("dwt2 coefficients", fontsize=14)
 
@@ -39,8 +39,14 @@ np.testing.assert_allclose(original, reconstructed, atol=1e-13, rtol=1e-13)
 plt.show()
 
 compression = Compression.Compression()
-compression.compress(LH)
+compression.compress(LL)
 
 fileName = 'compressedFile.cgk'
 
-compression.decompress(fileName)
+decompress = compression.decompress(fileName)
+
+
+fig = plt.figure()
+plt.imshow(decompress, interpolation="nearest", cmap=plt.cm.gray)
+
+plt.show()
