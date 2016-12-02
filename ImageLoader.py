@@ -34,14 +34,17 @@ class ImageLoader:
         for y in range(img.shape[0]):
             for x in range(img.shape[1]):
                 r, g, b = (redChannel[y][x],greenChannel[y][x],blueChannel[y][x])
-                img[y][x][0] = r #self.boundValue(r)
-                img[y][x][1] = g #self.boundValue(g)
-                img[y][x][2] = b #self.boundValue(b)
+                img[y][x][0] = self.boundValue(r)
+                img[y][x][1] = self.boundValue(g)
+                img[y][x][2] = self.boundValue(b)
 
         return img
 
-#    def boundValue(self,value):
-#        if(value>254):
-#            return 254
-#        else:
-#            return value
+    def boundValue(self,value):
+        if(value>254):
+           return 255
+        else:
+            if (value < 0):
+                return 0
+            else:
+                return value
