@@ -26,7 +26,8 @@ class ImageLoader:
         redChannel = self.image.convert("L")
         return redChannel
 
-    def mergeChannelsToImg(self,redChannel,greenChannel,blueChannel):
+    @staticmethod
+    def mergeChannelsToImg(redChannel,greenChannel,blueChannel):
         width = redChannel[0].size
         height = redChannel.size/width
         channels = 3
@@ -34,13 +35,14 @@ class ImageLoader:
         for y in range(img.shape[0]):
             for x in range(img.shape[1]):
                 r, g, b = (redChannel[y][x],greenChannel[y][x],blueChannel[y][x])
-                img[y][x][0] = self.boundValue(r)
-                img[y][x][1] = self.boundValue(g)
-                img[y][x][2] = self.boundValue(b)
+                img[y][x][0] = ImageLoader.boundValue(r)
+                img[y][x][1] = ImageLoader.boundValue(g)
+                img[y][x][2] = ImageLoader.boundValue(b)
 
         return img
 
-    def boundValue(self,value):
+    @staticmethod
+    def boundValue(value):
         if(value>254):
            return 255
         else:

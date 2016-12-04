@@ -3,8 +3,8 @@ import pywt
 
 class WaveletTransform:
 
-    def __init__(self, method):
-        self.method = method
+    def __init__(self, methodName):
+        self.method = methodName
 
     def tranrform(self, image):
         coeffs2 = pywt.dwt2(image, 'haar')
