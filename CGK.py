@@ -1,3 +1,4 @@
+from Huffman import Encoder, Decoder
 from ImageLoader import ImageLoader
 from WaveletTransform import WaveletTransform
 import simplejson as json
@@ -20,10 +21,16 @@ class CGK:
 
         coefsStr = self.coefsToStr(coefs)
 
+        encoder = Encoder(coefsStr)
+        encoder.write('compressedFile.cgk')
+
         return coefsStr
 
-    def decompressImage(self, filePath,str):
+    def decompressImage(self, filePath,stra):
         waveletTransform = WaveletTransform('haar')
+
+        decoder = Decoder('compressedFile.cgk')
+        str = decoder.decode()
 
         coefs = self.strToCoefs(str)
         imageRed = waveletTransform.reconstruct(coefs[0])
