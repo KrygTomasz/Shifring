@@ -1,6 +1,7 @@
 from Huffman import Encoder, Decoder
 from ImageLoader import ImageLoader
 from WaveletTransform import WaveletTransform
+from RLE import RLE
 import simplejson as json
 import numpy as np
 
@@ -20,10 +21,15 @@ class CGK:
         coefs = [coefsRed, coefsGreen, coefsBlue]
 
         coefsStr = self.coefsToStr(coefs)
-
+        coefsStr = RLE.Encode(coefsStr)
+        #print coefsStr
         encoder = Encoder(coefsStr)
         encoder.write('compressedFile.cgk')
-
+        '''
+        text_file = open("RLE.txt", "w")
+        text_file.write(coefsStr)
+        text_file.close()
+        '''
         return coefsStr
 
     def decompressImage(self, filePath,stra):
@@ -31,6 +37,7 @@ class CGK:
 
         decoder = Decoder('compressedFile.cgk')
         str = decoder.decode()
+        str = RLE.Decode(str)
 
         coefs = self.strToCoefs(str)
         imageRed = waveletTransform.reconstruct(coefs[0])
