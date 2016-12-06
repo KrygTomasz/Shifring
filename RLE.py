@@ -5,12 +5,12 @@ class RLE:
     @staticmethod
     def Encode(Str):
         span = 20
+
         inputStr = Str
         outputStr = ""
         bufor = ""
         count = 0
         for index in range(0,len(inputStr)+span,span):
-
             if(inputStr[index:index+span]==bufor):
                 count+=1
             else:

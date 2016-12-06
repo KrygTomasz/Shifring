@@ -9,7 +9,7 @@ class WaveletTransform:
     def tranrform(self, image):
         coeffs2 = pywt.dwt2(image, 'haar')
         LL, (LH, HL, HH) = coeffs2
-        threshold = 40
+        threshold = 20
         self.lossyCompress(LH, threshold)
         self.lossyCompress(HL, threshold)
         self.lossyCompress(HH, threshold)
