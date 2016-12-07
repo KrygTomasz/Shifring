@@ -3,8 +3,8 @@
 class RLE:
 
     @staticmethod
-    def Encode(Str):
-        span = 20
+    def Encode(Str,RLEspan):
+        span = RLEspan
 
         inputStr = Str
         outputStr = ""
@@ -14,7 +14,9 @@ class RLE:
             if(inputStr[index:index+span]==bufor):
                 count+=1
             else:
-                outputStr += "{"+bufor+"}"+str(count)
+                outputStr += "{"+bufor+"}"
+                if( count > 1):
+                    outputStr += str(count)
                 bufor = ""
 
             if (bufor == ""):
@@ -38,12 +40,17 @@ class RLE:
         inputTable = Str.split("{")
         inputTable = inputTable[1:]
         for pair in inputTable:
-            strCount = pair.split("}")
-            for i in range(int(strCount[1])):
-                output += strCount[0]
+            splitedPair = pair.split("}")
+            if(splitedPair[1].isdigit()):
+                for i in range(int(splitedPair[1])):
+                    output += splitedPair[0]
+            else:
+                output += splitedPair[0]
 
         return output
 
 
-
-#print RLE.Encode("[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]")
+#sample = "[0,0,0,0,0,0,0,0,0,GFGERGEFFADFRGWFVDRAVSDERWFCARv0,0,0,0,0,0,1]"
+#print RLE.Encode(sample)
+#print RLE.Decode(RLE.Encode(sample))
+#print sample == RLE.Decode(RLE.Encode(sample))

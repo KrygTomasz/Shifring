@@ -7,8 +7,9 @@ import numpy as np
 
 class CGK:
 
-    def compressImage(self,imgPath,threshold):
-        waveletTransform = WaveletTransform('haar')
+    def compressImage(self,imgPath,threshold,RLEspan):
+        self.threshold = threshold
+        waveletTransform = WaveletTransform('haar',self.threshold)
         image = ImageLoader(imgPath)
         print "Image loaded"
         redImg = image.getRedChannel()
@@ -19,13 +20,14 @@ class CGK:
         coefsGreen = waveletTransform.tranrform(greenImg)
         coefsBlue = waveletTransform.tranrform(blueImg)
         coefs = [coefsRed, coefsGreen, coefsBlue]
+        print len(coefsRed[0])
         print "Img transformed"
 
         coefsStr = self.coefsToStr(coefs)
 
         print "Json ready"
 
-        coefsStr = RLE.Encode(coefsStr)
+        coefsStr = RLE.Encode(coefsStr,RLEspan)
 
         print "RLEed"
 
@@ -41,10 +43,10 @@ class CGK:
         '''
         return coefsStr
 
-    def decompressImage(self, filePath,stra):
-        waveletTransform = WaveletTransform('haar')
+    def decompressImage(self, filePat):
+        waveletTransform = WaveletTransform('haar',0)
 
-        decoder = Decoder('compressedFile.cgk')
+        decoder = Decoder(filePat)
         str = decoder.decode()
 
         print "Huffman decoded"

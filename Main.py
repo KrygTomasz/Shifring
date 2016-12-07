@@ -5,13 +5,15 @@ import matplotlib.pyplot as plt
 from CGK import CGK
 from ImageLoader import ImageLoader
 
-cgk = CGK()
-str = cgk.compressImage("picture4.bmp", 4)
 
-image = ImageLoader("picture4.bmp")
+picture = "picture21.bmp"
+cgk = CGK()
+str = cgk.compressImage("SampleImages/"+picture, 40 , 20)
+
+image = ImageLoader("SampleImages/"+picture)
 #print str
 
-reconstructedImage = cgk.decompressImage("picture3.cgk", str)
+reconstructedImage = cgk.decompressImage("compressedFile.cgk")
 
 plotImg = plt.figure()
 ax = plotImg.add_subplot(1, 2,  1)
