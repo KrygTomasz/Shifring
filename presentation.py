@@ -12,9 +12,11 @@ import Compression
 from ImageLoader import ImageLoader
 from WaveletTransform import WaveletTransform
 
-waveletTransform = WaveletTransform('haar')
+waveletTransform = WaveletTransform('haar',40)
 
-image = ImageLoader("picture2.jpg")
+picture = "picture21.bmp"
+
+image = ImageLoader("SampleImages/"+picture)
 
 
 plotImg = plt.figure()

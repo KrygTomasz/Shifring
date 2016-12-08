@@ -8,7 +8,7 @@ from ImageLoader import ImageLoader
 
 picture = "picture21.bmp"
 cgk = CGK()
-str = cgk.compressImage("SampleImages/"+picture, 40 , 20)
+str = cgk.compressImage("SampleImages/"+picture, 40, 20)
 
 image = ImageLoader("SampleImages/"+picture)
 #print str
