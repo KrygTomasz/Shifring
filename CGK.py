@@ -32,7 +32,7 @@ class CGK:
         print "RLEed"
 
         encoder = Encoder(coefsStr)
-        encoder.write('compressedFile.cgk')
+        encoder.write(imgPath + '.cgk')
 
         print "Compression done."
 
