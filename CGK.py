@@ -4,10 +4,11 @@ from WaveletTransform import WaveletTransform
 from RLE import RLE
 import simplejson as json
 import numpy as np
+import os
 
 class CGK:
 
-    def compressImage(self,imgPath,threshold,RLEspan):
+    def compressImage(self,imgPath,threshold = 40,RLEspan = 20):
         self.threshold = threshold
         waveletTransform = WaveletTransform('haar',self.threshold)
         image = ImageLoader(imgPath)
@@ -32,7 +33,8 @@ class CGK:
         print "RLEed"
 
         encoder = Encoder(coefsStr)
-        encoder.write('compressedFile.cgk')
+        imageName = os.path.splitext(imgPath)[0] + '.cgk'
+        encoder.write(imageName)
 
         print "Compression done."
 
