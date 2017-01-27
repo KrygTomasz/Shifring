@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d17d4e72-0ca5-4bcf-851d-00a02137ca37" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CGK.py" afterPath="$PROJECT_DIR$/CGK.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.py" afterPath="$PROJECT_DIR$/Main.py" />
     </list>
     <ignored path="Shifring.iws" />
@@ -26,8 +25,8 @@
       <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
+            <state relative-caret-position="225">
+              <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
               <folding>
                 <element signature="e#47#67#0" expanded="true" />
               </folding>
@@ -889,8 +888,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
+        <state relative-caret-position="225">
+          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
           <folding>
             <element signature="e#47#67#0" expanded="true" />
           </folding>

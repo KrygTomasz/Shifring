@@ -13,7 +13,7 @@ from PIL import Image, ImageTk
 
 
 def encrypt():
-    cgkFile = dialog.askopenfile(parent = root, initialdir='/Users/kryguu/PycharmProjects/Shifring', title='Select .bmp file', filetypes=[('.bmp files', '.bmp')])
+    cgkFile = dialog.askopenfile(parent = root, initialdir = currentDirectory, title = 'Select .bmp file', filetypes = [('.bmp files', '.bmp')])
 
     cgk = CGK()
     global threshold
@@ -26,12 +26,12 @@ def encrypt():
     tkMessageBox.showinfo("Information", "Image successfully compressed.")
 
 def decrypt():
-    cgkFile = dialog.askopenfile(parent = root,initialdir='/Users/kryguu/PycharmProjects/Shifring',title='Select .cgk file', filetypes=[('.cgk files', '.cgk')])
+    cgkFile = dialog.askopenfile(parent = root,initialdir = currentDirectory,title = 'Select .cgk file', filetypes = [('.cgk files', '.cgk')])
 
     cgk = CGK()
     reconstructedImage = cgk.decompressImage(cgkFile.name)
 
-    fileName = os.path.splitext(cgkFile.name)[0] + '.bmp'
+    fileName = os.path.splitext(cgkFile.name)[0] + '-decompressed' + '.bmp'
 
     scipy.misc.imsave(fileName, reconstructedImage)
 
@@ -65,6 +65,8 @@ def createDialog():
     spaceLabel.pack()
     decompressButton.pack()
     imageLabel.pack()
+
+currentDirectory = os.path.dirname(os.path.realpath(__file__))
 
 root = tk.Tk()
 threshold = tk.StringVar()
