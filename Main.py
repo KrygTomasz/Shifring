@@ -6,61 +6,70 @@ import tkFileDialog as dialog
 import tkMessageBox
 from tkinter import Image as ImageTk
 import scipy.misc
+import os
 
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 from CGK import CGK
-from ImageLoader import ImageLoader
 from PIL import Image, ImageTk
 
 
 def encrypt():
-    print 'en'
-
-    cgkFile = dialog.askopenfile(parent = root, initialdir='/Users/kryguu/PycharmProjects/Shifring',
-                                 title='Select .bmp file', filetypes=[('.bmp files', '.bmp')])
+    cgkFile = dialog.askopenfile(parent = root, initialdir='/Users/kryguu/PycharmProjects/Shifring', title='Select .bmp file', filetypes=[('.bmp files', '.bmp')])
 
     cgk = CGK()
-    cgk.compressImage(cgkFile.name, 40, 20)
+    global threshold
+    try:
+        thresholdNumber = int(threshold.get())
+    except Exception:
+        thresholdNumber = 40
+    cgk.compressImage(cgkFile.name, thresholdNumber, 20)
 
-    tkMessageBox.showinfo("Information", "Image successfully encrypted.")
-
-
+    tkMessageBox.showinfo("Information", "Image successfully compressed.")
 
 def decrypt():
-    print 'de'
-
     cgkFile = dialog.askopenfile(parent = root,initialdir='/Users/kryguu/PycharmProjects/Shifring',title='Select .cgk file', filetypes=[('.cgk files', '.cgk')])
 
     cgk = CGK()
     reconstructedImage = cgk.decompressImage(cgkFile.name)
 
-    scipy.misc.imsave(cgkFile.name + '.jpg', reconstructedImage)
+    fileName = os.path.splitext(cgkFile.name)[0] + '.bmp'
 
-    image = Image.open(cgkFile.name + '.jpg')
+    scipy.misc.imsave(fileName, reconstructedImage)
+
+    image = Image.open(fileName)
     photo = ImageTk.PhotoImage(image)
 
     global imageLabel
     imageLabel.config(image = photo)
     imageLabel.image = photo
 
+def createDialog():
 
+    greetingLabel = tk.Label(root, text = 'Welcome to amazing image compressor and decompressor!')
+    infoLabel = tk.Label(root, text = 'Choose what to do by clicking a button below...')
+    compressButton = tk.Button(root, text = 'Compress an image...', command = encrypt)
+    thresholdLabel = tk.Label(root, text = 'Enter threshold (higher value means higher compression):')
+    global thresholdField
+    thresholdField = tk.Entry(root)
+    spaceLabel = tk.Label(root, text = '')
+    decompressButton = tk.Button(root, text = 'Decompress a .cgk file...', command = decrypt)
+    global imageLabel
+    imageLabel = tk.Label(root, text = '')
+
+    greetingLabel.pack()
+    infoLabel.pack()
+    compressButton.pack()
+    thresholdLabel.pack()
+    thresholdField.pack()
+    global threshold
+    thresholdField.config(textvariable = threshold)
+    spaceLabel.pack()
+    decompressButton.pack()
+    imageLabel.pack()
 
 root = tk.Tk()
-
-Label1 = tk.Label(root, text = 'Welcome to amazing image encryptor and decryptor!')
-Label2 = tk.Label(root, text = 'Choose what to do by clicking a button below...')
-Button1 = tk.Button(root, text = 'Encrypt an image...', command = encrypt)
-Button2 = tk.Button(root, text = 'Decrypt a .cgk file...', command = decrypt)
+threshold = tk.StringVar()
 imageLabel = tk.Label(root, text = '')
-
-
-Label1.pack()
-Label2.pack()
-Button1.pack()
-Button2.pack()
-imageLabel.pack()
-
+createDialog()
 root.mainloop()
 
 
