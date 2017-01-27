@@ -46,29 +46,32 @@ def createDialog():
 
     greetingLabel = tk.Label(root, text = 'Welcome to amazing image compressor and decompressor!')
     infoLabel = tk.Label(root, text = 'Choose what to do by clicking a button below...')
-    compressButton = tk.Button(root, text = 'Compress an image...', command = encrypt)
+    spaceLabel1 = tk.Label(root, text='')
+    compressButton = tk.Button(root, text = 'Compress an image to .cgk', command = encrypt)
     thresholdLabel = tk.Label(root, text = 'Enter threshold (higher value means higher compression):')
     global thresholdField
     thresholdField = tk.Entry(root)
-    spaceLabel = tk.Label(root, text = '')
-    decompressButton = tk.Button(root, text = 'Decompress a .cgk file...', command = decrypt)
+    spaceLabel2 = tk.Label(root, text = '')
+    decompressButton = tk.Button(root, text = 'Decompress a .cgk file', command = decrypt)
     global imageLabel
     imageLabel = tk.Label(root, text = '')
 
     greetingLabel.pack()
     infoLabel.pack()
+    spaceLabel1.pack()
     compressButton.pack()
     thresholdLabel.pack()
     thresholdField.pack()
     global threshold
     thresholdField.config(textvariable = threshold)
-    spaceLabel.pack()
+    spaceLabel2.pack()
     decompressButton.pack()
     imageLabel.pack()
 
 currentDirectory = os.path.dirname(os.path.realpath(__file__))
 
 root = tk.Tk()
+root.wm_title('Shifring')
 threshold = tk.StringVar()
 imageLabel = tk.Label(root, text = '')
 createDialog()
